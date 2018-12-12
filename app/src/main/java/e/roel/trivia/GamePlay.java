@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -52,7 +53,21 @@ public class GamePlay extends AppCompatActivity implements QuestionRequest.Callb
         button4 = findViewById(R.id.b4);
         pBar = findViewById(R.id.progressBar);
 
+        // Set buttons to be half the witdh of the screen minus a little for padding
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int displayHeight = displayMetrics.heightPixels;
+        int displayWidth = displayMetrics.widthPixels;
+
+        Button[] buttons = {button1, button2, button3, button4};
+        for (int i = 0; i < 4; i++) {
+            buttons[i].setWidth(displayWidth - (displayWidth/16));
+            buttons[i].setHeight(displayHeight/8);
+        }
+
+
         score = 0;
+
     }
 
     @Override
@@ -107,6 +122,7 @@ public class GamePlay extends AppCompatActivity implements QuestionRequest.Callb
                 break;
         }
 
+        Log.d(tag, correctAnswer + "");
         pBar.setProgress(questionCounter);
     }
 

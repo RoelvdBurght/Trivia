@@ -5,8 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class EndGame extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class EndGame extends AppCompatActivity implements HighscoreRequest.Callback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,5 +31,15 @@ public class EndGame extends AppCompatActivity {
     public void newGame(View v) {
         Intent newGameIntent = new Intent(EndGame.this, GamePlay.class);
         startActivity(newGameIntent);
+    }
+
+    @Override
+    public void gotHighscore(ArrayList<RowEntry> rowEntries) {
+
+    }
+
+    @Override
+    public void gotHighscoreError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

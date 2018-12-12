@@ -65,7 +65,7 @@ public class QuestionRequest implements Response.Listener<JSONObject>, Response.
     }
 
     // Takes a JSON array containing the questions and parses it, filling an arraylist with
-    // question objects containing the data. This arralist is returned.
+    // question objects containing the data. This arraylist is returned.
     // If something fails the error is shown to the user.
     private ArrayList<Question> fillQuestionArray(JSONArray js) {
         ArrayList<Question> arr = new ArrayList<Question>();

@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:baselineAligned="false"
     android:background="@color/backgroundMain"
-    android:weightSum="100"
     tools:context=".GamePlay">
 
     <ProgressBar
@@ -28,70 +28,61 @@
         android:textColor="@color/textSilver"
         android:textSize="30sp" />
 
+
     <LinearLayout
-        android:weightSum="100"
+        android:id="@+id/buttonContainer1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="40"
+        android:orientation="horizontal"
         android:gravity="bottom"
+        android:paddingLeft="10dp"
+        android:baselineAligned="false"
+        android:paddingRight="10dp">
 
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/buttonContainer1"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/b1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_weight="10"
-            android:gravity="top"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:layout_weight="1"
+            android:onClick="answer"
+            android:text="Button" />
 
-            <Button
-                android:id="@+id/b1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="answer"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/b2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="answer"
-                android:text="Button" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/buttonContainer2"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/b2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="70"
-            android:padding="10dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/b3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="answer"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/b4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="answer"
-                android:text="Button" />
-        </LinearLayout>
+            android:layout_weight="1"
+            android:onClick="answer"
+            android:text="Button" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonContainer2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:baselineAligned="false"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/b3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="answer"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/b4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="answer"
+            android:text="Button" />
+    </LinearLayout>
+
 
 </LinearLayout>
