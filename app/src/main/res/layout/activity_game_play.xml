@@ -25,6 +25,7 @@
         android:fontFamily="@font/alef"
         android:padding="15dp"
         android:text="Hier je vraag"
+        android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/textSilver"
         android:textSize="30sp" />

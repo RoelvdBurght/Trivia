@@ -173,7 +173,7 @@ public class GamePlay extends AppCompatActivity implements QuestionRequest.Callb
                 public void run() {
                     questionView.setBackgroundColor(getResources().getColor(R.color.backgroundMain));
                 }
-            }, 100);
+            }, 10000);
 
             // Proceed to the next question
             questionCounter ++;
