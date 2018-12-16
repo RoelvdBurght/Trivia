@@ -4,7 +4,7 @@
 
     <!-- View background color -->
     <solid
-        android:color="@color/backgroundMain" >
+        android:color="@color/buttonColor" >
     </solid>
 
     <!-- View border color and width -->

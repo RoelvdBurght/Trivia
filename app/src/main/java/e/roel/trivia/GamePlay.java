@@ -53,7 +53,7 @@ public class GamePlay extends AppCompatActivity implements QuestionRequest.Callb
         button4 = findViewById(R.id.b4);
         pBar = findViewById(R.id.progressBar);
 
-        // Set buttons to be half the witdh of the screen minus a little for padding
+        // Set buttons to be half the width of the screen minus a little for padding
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int displayHeight = displayMetrics.heightPixels;

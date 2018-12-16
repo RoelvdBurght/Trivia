@@ -1,6 +1,8 @@
 package e.roel.trivia;
 
 import android.content.Context;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 
 import com.android.volley.RequestQueue;
@@ -12,8 +14,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class QuestionRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
@@ -51,7 +53,6 @@ public class QuestionRequest implements Response.Listener<JSONObject>, Response.
     // On error, pass the error to the main view and show it to the user.
     @Override
     public void onErrorResponse(VolleyError error) {
-        Log.d(tag, "error");
         caller.gotQuestionsError(error.getMessage());
     }
 
@@ -73,6 +74,7 @@ public class QuestionRequest implements Response.Listener<JSONObject>, Response.
         for (int i = 0; i < length; i++) {
 
             try {
+                // Retrieve the questions and answer strings from the json object
                 JSONObject questionEntry = (JSONObject) js.get(i);
                 String q = questionEntry.getString("question");
                 String cA = questionEntry.getString("correct_answer");
@@ -82,6 +84,15 @@ public class QuestionRequest implements Response.Listener<JSONObject>, Response.
                 String wA3 = wrongQs.getString(2);
                 String cat = questionEntry.getString("category");
                 String diff = questionEntry.getString("difficulty");
+
+                // Decode the special characters
+                q = Html.fromHtml(q).toString();
+                cA = Html.fromHtml(cA).toString();
+                wA1 = Html.fromHtml(wA1).toString();
+                wA2 = Html.fromHtml(wA2).toString();
+                wA3 = Html.fromHtml(wA3).toString();
+                cat = Html.fromHtml(cat).toString();
+                diff = Html.fromHtml(diff).toString();
                 Question qObject = new Question(q, cA, wA1, wA2, wA3, diff, cat);
                 arr.add(qObject);
             }

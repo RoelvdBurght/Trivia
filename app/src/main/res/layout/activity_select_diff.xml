@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/listViewScore"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:divider="@color/textSilver"
-    android:dividerHeight="2dp"
-    android:background="@color/backgroundMain" />
+    tools:context=".SelectDiff">
+
+</android.support.constraint.ConstraintLayout>

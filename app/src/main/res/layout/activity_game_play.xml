@@ -44,16 +44,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:onClick="answer"
-            android:text="Button" />
+            android:text="Button"
+            android:textColor="@color/textButton" />
+
 
         <Button
             android:id="@+id/b2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:onClick="answer"
-            android:text="Button" />
+            android:text="Button"
+            android:textColor="@color/textButton" />
 
     </LinearLayout>
 
@@ -72,13 +77,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/border"
+            android:textColor="@color/textButton"
             android:onClick="answer"
+            android:paddingRight="1dp"
             android:text="Button" />
 
         <Button
             android:id="@+id/b4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:textColor="@color/textButton"
+            android:paddingLeft="1dp"
+
             android:layout_weight="1"
             android:onClick="answer"
             android:text="Button" />

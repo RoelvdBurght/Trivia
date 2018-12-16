@@ -19,7 +19,11 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class HighscoreRequest implements Response.Listener<JSONArray>, Response.ErrorListener {
@@ -31,7 +35,7 @@ public class HighscoreRequest implements Response.Listener<JSONArray>, Response.
 
     private static final String URL = "https://ide50-rolo18.cs50.io:8080/list";
     public interface Callback {
-        void gotHighscore(ArrayList<RowEntry> rowEntries);
+        void gotHighscore(ArrayList<Score> Scores);
         void gotHighscoreError(String message);
     }
 
@@ -40,20 +44,23 @@ public class HighscoreRequest implements Response.Listener<JSONArray>, Response.
     }
 
 
+    // Parse the incoming jsonarray and make score objects containing the highscores
+    // Pass a sorted list of these objects back to the calling activity
     @Override
     public void onResponse(JSONArray response) {
-        ArrayList<RowEntry> rowEntries = new ArrayList<RowEntry>();
+        ArrayList<Score> scores = new ArrayList<Score>();
         for (int i = 0; i < response.length(); i++) {
             try {
                 JSONObject o = (JSONObject) response.get(i);
                 Iterator<String> keys = o.keys();
-                // Find the names and corresponding scores and savve them in a rowentry object
+                // Find the names and corresponding scores and save them in a score object
                 while (keys.hasNext()) {
                     String key = keys.next();
                     if (!key.equals("id")) {
-
-                        RowEntry row = new RowEntry(key, 1);
-                        rowEntries.add(row);
+                        String name = key;
+                        int score = o.getInt(key);
+                        Score s = new Score(name, score);
+                        scores.add(s);
                     }
                 }
             }
@@ -61,14 +68,14 @@ public class HighscoreRequest implements Response.Listener<JSONArray>, Response.
                 caller.gotHighscoreError(e.getMessage());
             }
         }
-        caller.gotHighscore(rowEntries);
+        scores = sortHighScores(scores);
+        caller.gotHighscore(scores);
     }
 
+    // Sends error message to the calling activity to display it to the user
     @Override
     public void onErrorResponse(VolleyError error) {
-        Log.d(tag, "error respomse");
-        Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
-        Log.d(tag, error.getMessage());
+        caller.gotHighscoreError(error.getMessage());
     }
 
 
@@ -77,8 +84,17 @@ public class HighscoreRequest implements Response.Listener<JSONArray>, Response.
         caller = activity;
         RequestQueue queue = Volley.newRequestQueue(context);
         JsonArrayRequest arrReq = new JsonArrayRequest(URL, this, null);
-        //JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL, null, this,this);
         queue.add(arrReq);
+    }
+
+    // Makes use of the implementation of comparable and Collections.sort to sort the highscores
+    // from high to low
+    private ArrayList<Score> sortHighScores(ArrayList<Score> scores) {
+        Collections.sort(scores);
+        for (int i = 0; i < scores.size(); i++) {
+            Log.d(tag, scores.get(i).getScore() + " ");
+        }
+        return scores;
     }
 }
 

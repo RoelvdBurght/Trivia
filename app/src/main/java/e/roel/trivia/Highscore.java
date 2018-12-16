@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class Highscore extends AppCompatActivity implements HighscoreRequest.Callback {
 
+    String tag = "HighScore";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,33 +32,16 @@ public class Highscore extends AppCompatActivity implements HighscoreRequest.Cal
     }
 
     @Override
-    public void gotHighscore(ArrayList<RowEntry> rowEntries) {
-        Toast.makeText(this, "got", Toast.LENGTH_LONG).show();
-
+    public void gotHighscore(ArrayList<Score> scores) {
         ListView scoreList = findViewById(R.id.listViewScore);
         ScoreAdapter adapter = new ScoreAdapter(this, R.layout.score_item,
-                rowEntries);
+                scores);
         scoreList.setAdapter(adapter);
 
     }
 
     @Override
     public void gotHighscoreError(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
-/*
-
-    // Listener class for the category listview, sends us to the corresponding category when clicked
-    public class CategoryListener implements AdapterView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            String categoryClicked = parent.getItemAtPosition(position).toString();
-            Intent intent = new Intent(.this, MenuActivity.class);
-            intent.putExtra("category", categoryClicked);
-            startActivity(intent);
-        }
-
-    }
-    */
 }
