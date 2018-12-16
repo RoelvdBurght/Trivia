@@ -21,9 +21,10 @@
         android:id="@+id/qView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:fontFamily="@font/alef"
         android:padding="15dp"
         android:text="Hier je vraag"
-        android:layout_weight="40"
         android:textAlignment="center"
         android:textColor="@color/textSilver"
         android:textSize="30sp" />
@@ -45,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/border"
+            android:fontFamily="@font/alef"
             android:onClick="answer"
             android:text="Button"
             android:textColor="@color/textButton" />
@@ -56,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/border"
+            android:fontFamily="@font/alef"
             android:onClick="answer"
             android:text="Button"
             android:textColor="@color/textButton" />
@@ -78,22 +81,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/border"
-            android:textColor="@color/textButton"
+            android:fontFamily="@font/alef"
             android:onClick="answer"
             android:paddingRight="1dp"
-            android:text="Button" />
+            android:text="Button"
+            android:textColor="@color/textButton" />
 
         <Button
             android:id="@+id/b4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/border"
-            android:textColor="@color/textButton"
-            android:paddingLeft="1dp"
-
             android:layout_weight="1"
+            android:background="@drawable/border"
+            android:fontFamily="@font/alef"
+
             android:onClick="answer"
-            android:text="Button" />
+            android:paddingLeft="1dp"
+            android:text="Button"
+            android:textColor="@color/textButton" />
     </LinearLayout>
 
 

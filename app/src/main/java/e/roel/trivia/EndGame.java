@@ -46,7 +46,7 @@ public class EndGame extends AppCompatActivity implements PostHighscore.Callback
 
     // Start a new game when new game button is clicked
     public void newGame(View v) {
-        Intent newGameIntent = new Intent(EndGame.this, GamePlay.class);
+        Intent newGameIntent = new Intent(EndGame.this, SelectDiff.class);
         startActivity(newGameIntent);
     }
 
@@ -74,26 +74,11 @@ public class EndGame extends AppCompatActivity implements PostHighscore.Callback
         saveButton.setVisibility(View.INVISIBLE);
     }
 
-    // On error when posting, display a message to the user showing this.
+    // On error when posting, display a message to the user showing this. (The message argument
+    // was empty when checking so i hardcoded the message)
     @Override
     public void postError(String message) {
-        if (message.equals("")) {
-            Toast.makeText(this, "Server connection error, please check your internet "+
-                            "connection", Toast.LENGTH_LONG).show();
-        }
-        else {
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-        }
+        Toast.makeText(this, "Server connection error, the server might be down",
+                Toast.LENGTH_LONG).show();
     }
-
-    //
-//    @Override
-//    public void gotHighscore(ArrayList<Score> scores) {
-//
-//    }
-//
-//    @Override
-//    public void gotHighscoreError(String message) {
-//        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-//    }
 }

@@ -18,8 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GamePlay extends AppCompatActivity implements QuestionRequest.Callback{
-
+public class GamePlay extends AppCompatActivity implements QuestionRequest.Callback {
 
     String tag = "GamePlay";
     ArrayList<Question> allQuestions;
@@ -35,14 +34,22 @@ public class GamePlay extends AppCompatActivity implements QuestionRequest.Callb
     Button button3;
     Button button4;
     ProgressBar pBar;
+    private int diff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play);
 
+        // Retrieve the difficulty
+        Bundle diffBundle = getIntent().getExtras();
+        diff = 1;
+        if (diffBundle != null) {
+            diff = diffBundle.getInt("diff");
+        }
+
         // Make QuestionRequest object and make a call to the server requesting the questions
-        QuestionRequest qr = new QuestionRequest(this);
+        QuestionRequest qr = new QuestionRequest(this, diff);
         qr.getQuestions(this);
 
         // Find the relevant views
@@ -64,12 +71,11 @@ public class GamePlay extends AppCompatActivity implements QuestionRequest.Callb
             buttons[i].setWidth(displayWidth - (displayWidth/16));
             buttons[i].setHeight(displayHeight/8);
         }
-
-
         score = 0;
-
     }
 
+    // When the questions are retrieved from the server, initialize necessary parameters and
+    // Start the game
     @Override
     public void gotQuestions(ArrayList<Question> questions) {
         allQuestions = questions;
@@ -80,6 +86,7 @@ public class GamePlay extends AppCompatActivity implements QuestionRequest.Callb
         diplayUpdate();
     }
 
+    // Display error message to the user when questions could not be retrieved
     @Override
     public void gotQuestionsError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
@@ -129,8 +136,10 @@ public class GamePlay extends AppCompatActivity implements QuestionRequest.Callb
     // Check if the answer was correct and increment the questionCounter and call displayupdate to
     // display next question
     public void answer(View v) {
+
         // Check if there are still questions left
         if (questionCounter < maxQuestions - 1) {
+
             // Get the id of the pressed button to check if it was th   e correct one
             int pressedButton = -1;
             switch (v.getId()) {
@@ -148,6 +157,7 @@ public class GamePlay extends AppCompatActivity implements QuestionRequest.Callb
                     break;
             }
 
+            // Increment score if correct answer clicked
             if (pressedButton == correctAnswer) {
                 score++;
                 questionView.setBackgroundColor(Color.GREEN);
@@ -156,22 +166,25 @@ public class GamePlay extends AppCompatActivity implements QuestionRequest.Callb
                 questionView.setBackgroundColor(Color.RED);
             }
 
+            // Handler lets the code inside it get executed after a certain amount of time
+            // Screen flashes red/green for a very brief moment
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     questionView.setBackgroundColor(getResources().getColor(R.color.backgroundMain));
-
                 }
             }, 100);
 
+            // Proceed to the next question
             questionCounter ++;
             currentQuestion = allQuestions.get(questionCounter);
             diplayUpdate();
-
-
         }
+
+        // When the game is finished, start new activity and pass the score allong
         else {
             Intent intent = new Intent(GamePlay.this, EndGame.class);
+            score = score*diff;
             intent.putExtra("score", score+"");
             startActivity(intent);
         }

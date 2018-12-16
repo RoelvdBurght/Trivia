@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Trivia</string>
+    <string name="des1">For a casual, quick game of trivia with the entire family. Score will be multiplied by 1</string>
+    <string name="des2">For those who want their wits challenged and maybe even make it to the leaderboards. Score will be multiplied by 2</string>
+    <string name="des3">For the veteran trivia masters seeking a real challenge with high rewards. Score will be multiplied by 3</string>
+
 </resources>

@@ -21,17 +21,22 @@ import java.util.ArrayList;
 public class QuestionRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
 
     String tag = "QuestionRequest";
-    Context context;
+    private Context context;
     private Callback caller;
-    private static final String URL = "https://opentdb.com/api.php?amount=10&type=multiple";
+    private int diff = 1;
+    private static final String URL1 = "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple";
+    private static final String URL2 = "https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple";
+    private static final String URL3 = "https://opentdb.com/api.php?amount=10&difficulty=hard&type=multiple";
+
 
     public interface Callback {
         void gotQuestions(ArrayList<Question> questions);
         void gotQuestionsError(String message);
     }
 
-    public QuestionRequest(Context c) {
+    public QuestionRequest(Context c, int d) {
         this.context = c;
+        this.diff = d;
     }
 
     // Parse the incoming json object, make and fill a question object for each question, and
@@ -58,10 +63,21 @@ public class QuestionRequest implements Response.Listener<JSONObject>, Response.
 
 
     // Calls the server to give the questions, adds a request to the queue
+    // switches on the difficulty to check which url to make the call to
     void getQuestions(Callback activity) {
         caller = activity;
         RequestQueue queue = Volley.newRequestQueue(context);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL, null, this,this);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL1, null, this,this);;
+        switch (diff) {
+            case 1:
+                jsonObjectRequest = new JsonObjectRequest(URL1, null, this,this);
+                break;
+            case 2:
+                jsonObjectRequest = new JsonObjectRequest(URL2, null, this,this);
+                break;
+            case 3:
+                jsonObjectRequest = new JsonObjectRequest(URL3, null, this,this);
+        }
         queue.add(jsonObjectRequest);
     }
 

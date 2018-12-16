@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".GamePlay">
+        <activity android:name=".SelectDiff">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".EndGame" />
         <activity android:name=".Highscore" />
-        <activity android:name=".SelectDiff"></activity>
+        <activity android:name=".GamePlay"></activity>
     </application>
 
 </manifest>

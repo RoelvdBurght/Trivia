@@ -10,6 +10,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/lobster"
         android:text="TextView"
+        android:textAlignment="center"
         android:textColor="@color/textSilver"
         android:textSize="40dp" />
 
@@ -20,7 +21,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/lobster"
         android:text="TextView"
-        android:textAlignment="center"
+        android:textAlignment="textEnd"
         android:textColor="@color/textSilver"
         android:textSize="40dp" />
 </LinearLayout>
